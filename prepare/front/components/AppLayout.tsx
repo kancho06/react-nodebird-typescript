@@ -31,7 +31,7 @@ const AppLayout = ({children}) => {
             {/**/}
             <Row gutter={8}> {/* 컬럼사이에 간격을 주는것 (패딩 4px씩 들어감)*/}
                 <Col xs={24} md={6}>  {/* n/24 즉, 모바일일때 24(full) 화면을 차지하고 데스크탑으로 갔을때는 6(25%) 화면을 차지한다. */}
-                    {isLoggedIn ? <UserProfile /> : <LoginForm />}
+                    {isLoggedIn ? <UserProfile setIsLoggedIn={setIsLoggedIn} /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}
                 </Col>
                 <Col xs={24} md={12}> {/* 모바일에서 세로로 배치되었던것이 데스크탑에서는 세로로 배치가 된다. 같이 배치하고 싶으면 13 ,11 이런식으로 합이 24가 되게 해야한다. */}
                     {children}

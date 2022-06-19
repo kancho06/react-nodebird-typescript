@@ -2,25 +2,31 @@ import {Button, Form, Input} from 'antd'
 import {useCallback, useMemo, useState} from "react";
 import Link from "next/link";
 import styled from 'styled-components'
+import PropTypes from "prop-types";
+import useinput from "../hooks/useInput";
+import useInput from "../hooks/useInput";
 
 const ButtonWrapper = styled.div`
   margin-Top: 10px;
-`
+`;
 
-const LoginForm = () => {
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
+const FormWrapper = styled(Form)`
+  padding: 10px;
+`;
 
-    const onChangeId = useCallback((e) => {
-        setId(e.target.value);
-    }, []);
 
-    const onChangePassword = useCallback((e) => {
-        setPassword(e.target.value);
-    }, []);
+const LoginForm = ({ setIsLoggedIn }) => {
+    const [id, onChangeId] = useInput('');
+    const [password, onChangePassword] = useInput('');
+
+
+    const onSubmitForm = useCallback(() => {
+        console.log(id, password);
+        setIsLoggedIn(true);
+    }, [id, password])
 
     return (
-        <Form>
+        <FormWrapper onFinish={onSubmitForm}>
             <div>
                 <label htmlFor="user-id">ID</label>
                 <br />
@@ -41,8 +47,12 @@ const LoginForm = () => {
                 <Button type="primary" htmlType="submit" loading={false}>Login</Button>
                 <Link href="/signup"><a><Button>Signup</Button></a></Link>
             </ButtonWrapper>
-        </Form>
+        </FormWrapper>
     );
 };
+
+LoginForm.propTypes = {
+    setIsLoggedIn: PropTypes.func.isRequired,
+}
 
 export default LoginForm

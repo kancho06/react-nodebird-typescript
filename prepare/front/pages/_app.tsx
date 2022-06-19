@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import 'antd/dist/antd.css'
 import Head from 'next/head' // next 에서 헤드를 만질 수 있는 임포트를 기본 제공한다.
+import wrapper from "../store/configureStore";
 
 const NodeBird = ({ Component }) => {
     return (
@@ -19,4 +20,4 @@ NodeBird.propTypes = {
     Component: PropTypes.elementType.isRequired,
 }
 
-export default NodeBird;
+export default wrapper.withRedux(NodeBird);
