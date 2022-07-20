@@ -6,18 +6,33 @@ import {
 } from 'typesafe-actions';
 
 // 액션 수정하기
-// https://react.vlpt.us/using-typescript/05-ts-redux.html
-// https://redux-toolkit.js.org/api/createAction <- 이거보기
-const action = ({
+//https://velog.io/@chyoon0512/Typescript-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%98%88%EC%A0%9C-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0<- 이거보기
+// const action = ({
+//     CHANGE_NICKNAME: changeNickname
+// })
 
-})
-
-export const changeNickname = createAction(action.CHANGE_NICKNAME);
-export const loginAction  = createAction(action.LOG_IN);
-export const logoutAction = createAction(action.LOG_OUT);
+// export const changeNickname = createAction(action.CHANGE_NICKNAME);
+// export const loginAction  = createAction(action.LOG_IN);
+// export const logoutAction = createAction(action.LOG_OUT);
 
 
-type Action = ActionType<typeof action>
+// type Action = ActionType<typeof action>
+// user action type
+
+const CHANGE_NICKNAME = <const>'user/CHANGE_NICKNAME'
+const LOGIN = <const>'user/LOGIN'
+const LOGOUT = <const>'user/LOGOUT'
+
+export const changeNickname = () => ({type: CHANGE_NICKNAME})
+export const login = () => ({type: LOGIN})
+export const logout = () => ({type: LOGOUT})
+
+type UserActionType = {
+    changeNickname: typeof changeNickname
+    login: typeof login
+    logout: typeof logout
+}
+
 
 export interface User {
     id?: string,
@@ -34,29 +49,20 @@ export interface Post {
 }
 
 
-export interface InitialState {
-    user?: User,
-    post?: Post[]
-}
+// export interface InitialState {
+//     user?: User,
+//     post?: Post[]
+// }
 
 
-const initialState: InitialState = {
-    user: {
-        id: null,
-        password: null,
-        isLoggedIn: false,
-        user: null,
-        signupData: {},
-        loginData: {},
-    },
-    post: []
+interface initialStateType {
+    User: User
 }
+
+const initialState = { user: User }
 
 
 // (이전상태와 액션) => 다음상태
-const rootReducer = createReducer<InitialState, Action>(initialState, {
-    [action.LOG_IN]: (state, action?) => ({ ...state, user: { isLoggedIn: true, user: state.user } }),
-    [action.LOG_OUT]: (state, action) => ({ ...state, user: { isLoggedIn: false, user: null }  })
-});
+function action(state: initialStateType = initialState, action: UserActionType)
 
 export default rootReducer;
