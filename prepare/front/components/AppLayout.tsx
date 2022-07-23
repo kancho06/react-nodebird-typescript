@@ -6,14 +6,20 @@ import UserProfile from '../components/UserProfile'
 import LoginForm from '../components/LoginForm'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {InitialState} from "../reducers";
+
+
+
+interface Props {
+    children: React.ReactNode;
+}
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;
 `
 
-const AppLayout = ({children}) => {
-    const isLoggedIn = useSelector((state: InitialState) => state.user.isLoggedIn);
+const AppLayout = ({children}: Props) => {
+    // @ts-ignore
+    const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
     return (
         <div>
             <Menu mode="horizontal">
