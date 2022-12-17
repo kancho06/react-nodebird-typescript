@@ -1,11 +1,11 @@
 import {Button, Form, Input} from 'antd'
-import {useCallback, useMemo, useState} from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 import styled from 'styled-components'
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import useInput from "../hooks/useInput";
-import {loginAction} from "../redux/actions/userAction";
+import { loginAction } from "../reducers/user";
 
 
 const ButtonWrapper = styled.div`
@@ -24,12 +24,7 @@ const LoginForm = () => {
 
     const onSubmitForm = useCallback(() => {
         console.log(id, password);
-        dispatch(
-            loginAction({
-                id,
-                password
-            })
-        );
+        dispatch(loginAction({ id, password }));
     }, [id, password])
 
     return (

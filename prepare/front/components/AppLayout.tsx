@@ -1,25 +1,22 @@
 import * as PropTypes from 'prop-types';
 import Link from 'next/link';
 import {Input, Menu, Row, Col} from 'antd';
-import {useState} from "react"; // antd 에선 반응형 그리드를 지원한다
+import React from "react"; // antd 에선 반응형 그리드를 지원한다
 import UserProfile from '../components/UserProfile'
 import LoginForm from '../components/LoginForm'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
+import {InitialState} from "../reducers";
 
 
-
-interface Props {
-    children: React.ReactNode;
-}
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;
 `
 
-const AppLayout = ({children}: Props) => {
-    // @ts-ignore
-    const isLoggedIn = useSelector((state) => state.users.isLoggedIn);
+const AppLayout = ({ children }) => {
+    const { isLoggedIn } = useSelector((state: InitialState) => state.user);
+
     return (
         <div>
             <Menu mode="horizontal">
