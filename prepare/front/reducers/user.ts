@@ -1,8 +1,8 @@
 export interface User {
-    isLoggedIn: boolean,
-    user: any,
-    signUpData: any,
-    loginData: any
+    isLoggedIn: boolean;
+    user: any;
+    signUpData: any;
+    loginData: any;
 }
 
 const initialState: User = {
@@ -10,29 +10,29 @@ const initialState: User = {
     user: null,
     signUpData: {},
     loginData: {},
-}
+};
 
-export const loginAction = (data) => {
+export const loginAction = (data: any) => {
     return {
         type: "LOG_IN",
         data: data,
-    }
+    };
 };
 
 export const logoutAction = () => {
     return {
         type: "LOG_OUT",
-    }
-}
+    };
+};
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: any) => {
     switch (action.type) {
         case "LOG_IN":
             return {
                 ...state,
                 isLoggedIn: true,
                 user: action.data,
-            }
+            };
         case "LOG_OUT":
             return {
                 ...state,
@@ -42,6 +42,6 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
 
 export default reducer;

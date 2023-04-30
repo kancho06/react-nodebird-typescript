@@ -4,23 +4,22 @@ import user, { User } from "./user";
 import post, { Post } from "./post";
 
 export interface InitialState {
-    user: User,
-    post: Post
+    user: User;
+    post: Post;
 }
 
-
 const rootReducer = combineReducers({
-    index: (state = {}, action) => {
+    index: (state: InitialState, action) => {
         switch (action.type) {
             case HYDRATE:
-                console.log("HYDRATE => ", action);
-                return { ...state as InitialState, ...action.payload };
+                console.info("HYDRATE => ", action);
+                return { ...state, ...action.payload };
             default:
                 return state;
         }
     },
     user,
     post,
-})
+});
 
 export default rootReducer;

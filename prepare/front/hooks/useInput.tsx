@@ -1,11 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, ChangeEventHandler } from "react";
 
-export default (initialValue = null) => {
+export default (initialValue = ""): [string, ChangeEventHandler] => {
     const [value, setValue] = useState(initialValue);
-
-    const handler = useCallback((e) => {
+    const handler = useCallback((e: any) => {
         setValue(e.target.value);
     }, []);
-
     return [value, handler];
-}
+};
