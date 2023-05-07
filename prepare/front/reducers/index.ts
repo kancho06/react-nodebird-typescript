@@ -9,7 +9,7 @@ export interface InitialState {
 }
 
 const rootReducer = combineReducers({
-    index: (state: InitialState, action) => {
+    index: (state: InitialState = {} as InitialState, action) => {
         switch (action.type) {
             case HYDRATE:
                 console.info("HYDRATE => ", action);

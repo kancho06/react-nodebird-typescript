@@ -5,6 +5,16 @@ export interface User {
     loginData: any;
 }
 
+export enum UserActionType {
+    LOG_IN = "LOG_IN",
+    LOG_OUT = "LOG_OUT",
+}
+
+export interface UserAction {
+    type: UserActionType;
+    data: any;
+}
+
 const initialState: User = {
     isLoggedIn: false,
     user: null,
@@ -12,28 +22,22 @@ const initialState: User = {
     loginData: {},
 };
 
-export const loginAction = (data: any) => {
+export const createUserAction = (type: UserActionType, data?: any) => {
     return {
-        type: "LOG_IN",
+        type: type,
         data: data,
     };
 };
 
-export const logoutAction = () => {
-    return {
-        type: "LOG_OUT",
-    };
-};
-
-const reducer = (state = initialState, action: any) => {
+const reducer = (state = initialState, action: UserAction) => {
     switch (action.type) {
-        case "LOG_IN":
+        case UserActionType.LOG_IN:
             return {
                 ...state,
                 isLoggedIn: true,
                 user: action.data,
             };
-        case "LOG_OUT":
+        case UserActionType.LOG_OUT:
             return {
                 ...state,
                 isLoggedIn: false,

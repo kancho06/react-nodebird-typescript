@@ -4,8 +4,13 @@ export interface Post {
     postAdded: boolean;
 }
 
+export enum PostActionType {
+    ADD_POST = "ADD_POST",
+}
+
 export type PostAction = {
-    ADD_POST: "ADD_POST";
+    type: PostActionType;
+    data: any;
 };
 
 // 씨퀄라이져 사용시 본데이터가아닌 관계형으로 묶여있는데이터를 가져올때는 대문자로 쓴다.
@@ -60,19 +65,20 @@ const dummy = {
     Comments: [],
 };
 
-export const createAction = (action: PostAction, data?: any) => {
+export const createPostAction = (type: PostActionType, data?: any) => {
     return {
-        type: action,
-        data: data,
+        type: type,
+        date: data,
     };
 };
 
-function reducer(state = initialState, action: any) {
+function reducer(state = initialState, action: PostAction) {
     switch (action.type) {
-        case "ADD_POST":
+        case PostActionType.ADD_POST:
             return {
                 ...state,
                 mainPosts: [dummy, ...state.mainPosts],
+                postAdded: true,
             };
         default:
             return state;

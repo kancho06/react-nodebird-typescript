@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import useInput from "../hooks/useInput";
-import { loginAction } from "../reducers/user";
+import { createUserAction, UserActionType } from "../reducers/user";
 
 const ButtonWrapper = styled.div`
     margin-top: 10px;
@@ -20,7 +20,7 @@ const LoginForm = () => {
 
     const onSubmitForm = useCallback(() => {
         console.info(id, password);
-        dispatch(loginAction({ id, password }));
+        dispatch(createUserAction(UserActionType.LOG_IN, { id, password }));
     }, [id, password]);
 
     return (
