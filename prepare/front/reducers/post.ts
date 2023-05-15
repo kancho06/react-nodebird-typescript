@@ -1,6 +1,24 @@
+export interface MainPost {
+    id: number;
+    User: {
+        id: number;
+        nickname: string;
+    };
+    content: string;
+    Images: {
+        src: string;
+    }[];
+    Comments: {
+        User: {
+            nickname: string;
+        };
+        content: string;
+    }[];
+}
+
 export interface Post {
-    mainPosts: any;
-    imagePaths: any;
+    mainPosts: MainPost[];
+    imagePaths: any[];
     postAdded: boolean;
 }
 
@@ -72,7 +90,7 @@ export const createPostAction = (type: PostActionType, data?: any) => {
     };
 };
 
-function reducer(state = initialState, action: PostAction) {
+function reducer(state: Post = initialState, action: PostAction) {
     switch (action.type) {
         case PostActionType.ADD_POST:
             return {

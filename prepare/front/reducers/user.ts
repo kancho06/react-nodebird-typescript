@@ -1,6 +1,6 @@
 export interface User {
     isLoggedIn: boolean;
-    user: any;
+    me: any;
     signUpData: any;
     loginData: any;
 }
@@ -17,7 +17,7 @@ export interface UserAction {
 
 const initialState: User = {
     isLoggedIn: false,
-    user: null,
+    me: null,
     signUpData: {},
     loginData: {},
 };
@@ -29,19 +29,19 @@ export const createUserAction = (type: UserActionType, data?: any) => {
     };
 };
 
-const reducer = (state = initialState, action: UserAction) => {
+const reducer = (state: User = initialState, action: UserAction) => {
     switch (action.type) {
         case UserActionType.LOG_IN:
             return {
                 ...state,
                 isLoggedIn: true,
-                user: action.data,
+                me: action.data,
             };
         case UserActionType.LOG_OUT:
             return {
                 ...state,
                 isLoggedIn: false,
-                user: null,
+                me: null,
             };
         default:
             return state;
